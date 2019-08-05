@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import Aux from '../../hoc/Auxilary';
 import Burger from '../../components/Burger/Burger';
 import BuildControls from '../../components/Burger/BuildControls/BuildControls';
+import Modal from '../../components/UI/Modal/Modal'
 
 const INGRENDIENT_PRICES = {
     salad: 0.5,
@@ -31,7 +32,7 @@ class BurgerBuilder extends Component {
             .reduce((sum, el) => {
                 return sum + el;
             }, 0);
-            this.setState({purchasable: sum > 0});
+        this.setState({purchasable: sum > 0});
     }
 
     addIngredientHandler = (type) => {
@@ -75,6 +76,7 @@ class BurgerBuilder extends Component {
 
         return (
             <Aux>
+                <Modal />
                 <Burger ingredients={this.state.ingredients}/>
                 <BuildControls 
                     ingredientAdded={this.addIngredientHandler}
