@@ -1,5 +1,8 @@
+import * as actionTypes from "./actions";
+
 const initialState = {
-  random: ""
+  ingredients: null,
+  totalPrice: 4
 };
 
 const reducer = (state = initialState, action) => {
