@@ -7,7 +7,7 @@ import "./index.css";
 import App from "./App";
 import { BrowserRouter } from "react-router-dom";
 import registerServiceWorker from "./registerServiceWorker";
-import reducer from "./store/reducer";
+import reducer from "./store/reducer/burgerBuilder";
 
 const store = createStore(
   reducer,
