@@ -7,10 +7,10 @@ import "./index.css";
 import App from "./App";
 import { BrowserRouter } from "react-router-dom";
 import registerServiceWorker from "./registerServiceWorker";
-import reducer from "./store/reducer/burgerBuilder";
+import burgerBuilderReducer from "./store/reducer/burgerBuilder";
 
 const store = createStore(
-  reducer,
+  burgerBuilderReducer,
   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 );
 
