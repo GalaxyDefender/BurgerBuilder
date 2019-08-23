@@ -6,17 +6,22 @@ import Burger from "../../components/Burger/Burger";
 import BuildControls from "../../components/Burger/BuildControls/BuildControls";
 import Modal from "../../components/UI/Modal/Modal";
 import OrderSummary from "../../components/Burger/OrderSummary/OrderSummary";
-import axios from "../../axios-orders";
 import Spinner from "../../components/UI/Spinner/Spinner";
 import withErrorHandler from "../../hoc/withErrorHandler/withErrorHandler";
 import * as burgerBuilderActions from "../../store/actions/index";
+import axios from "../../axios-orders";
 
 class BurgerBuilder extends Component {
+  // constructor(props) {
+  //     super(props);
+  //     this.state = {...}
+  // }
   state = {
     purchasing: false
   };
 
   componentDidMount() {
+    console.log(this.props);
     this.props.onInitIngredients();
   }
 
@@ -35,7 +40,7 @@ class BurgerBuilder extends Component {
     this.setState({ purchasing: true });
   };
 
-  purchasedCancelHandler = () => {
+  purchaseCancelHandler = () => {
     this.setState({ purchasing: false });
   };
 
@@ -51,7 +56,6 @@ class BurgerBuilder extends Component {
       disabledInfo[key] = disabledInfo[key] <= 0;
     }
     let orderSummary = null;
-
     let burger = this.props.error ? (
       <p>Ingredients can't be loaded!</p>
     ) : (
@@ -72,22 +76,21 @@ class BurgerBuilder extends Component {
           />
         </Aux>
       );
-
       orderSummary = (
         <OrderSummary
           ingredients={this.props.ings}
           price={this.props.price}
-          purchaseCancel={this.purchasedCancelHandler}
+          purchaseCancel={this.purchaseCancelHandler}
           purchaseContinues={this.purchaseContinueHandler}
         />
       );
     }
-
+    // {salad: true, meat: false, ...}
     return (
       <Aux>
         <Modal
           show={this.state.purchasing}
-          modalClosed={this.purchasedCancelHandler}
+          modalClosed={this.purchaseCancelHandler}
         >
           {orderSummary}
         </Modal>
@@ -111,7 +114,7 @@ const mapDispatchToProps = dispatch => {
       dispatch(burgerBuilderActions.addIngredient(ingName)),
     onIngredientRemoved: ingName =>
       dispatch(burgerBuilderActions.removeIngredient(ingName)),
-    onInitIngredients: () => dispatch(burgerBuilderActions.initIngredients)
+    onInitIngredients: () => dispatch(burgerBuilderActions.initIngredients())
   };
 };
 
